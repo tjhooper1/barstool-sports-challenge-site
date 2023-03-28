@@ -7,8 +7,8 @@ interface props {
 
 export default function BoxScorePoint({ point, className }: props) {
   return (
-    <div className={`flex-grow w-24 text-center justify-center ${classNames(className)}`}>
-      <h1 className="text-4xl">{point}</h1>
+    <div className={`bg-white ${classNames(className)}`}>
+      <h1 className="">{point}</h1>
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import Skeleton from "../Skeleton";
+import Skeleton from "../../Skeleton";
 import BoxScorePoint from "./BoxScorePoint";
 
 interface props {
@@ -24,16 +24,19 @@ export default function MlbBoxScoreTeam({
         {scores.map((score: any, index: any) => {
           return <BoxScorePoint key={index} point={score} />;
         })}
-        <BoxScorePoint className="bg-gray-200 border-l-2 border-black border-opacity-10" point={runs} />
-        <BoxScorePoint className="bg-gray-200" point={hits} />
-        <BoxScorePoint className="bg-gray-200" point={errors} />
+        <BoxScorePoint
+          className="bg-white"
+          point={runs}
+        />
+        <BoxScorePoint className="bg-white" point={hits} />
+        <BoxScorePoint className="bg-white" point={errors} />
       </>
     );
   };
   return (
-    <div className="flex w-[90vw] border rounded-bl-md m-auto">
-      <div className="max-w-[5rem] min-w-[5rem] flex-grow w-24 text-center rounded-bl-md bg-gray-200 border-r-2 border-black border-opacity-10">
-        <h1 className="text-3xl">{!isLoading && team}</h1>
+    <div className="flex">
+      <div className=" bg-white">
+        <h1 className="">{!isLoading && team}</h1>
       </div>
       {isLoading ? <Skeleton /> : showScores()}
     </div>

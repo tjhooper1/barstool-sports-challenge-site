@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useQueryClient, useQuery } from "react-query";
+import HitterScore from "../components/Mlb/hitterScore/HitterScore";
+import HitterScoreContainer from "../components/Mlb/hitterScore/HitterScoreContainer";
 
-import MlbBoxScoreInnings from "../components/mlbBoxscore/MlbBoxScoreInnings";
-import MlbBoxScoreTeam from "../components/mlbBoxscore/MlbBoxScoreTeam";
+import MlbBoxScoreInnings from "../components/Mlb/mlbBoxscore/MlbBoxScoreInnings";
+import MlbBoxScoreTeam from "../components/Mlb/mlbBoxscore/MlbBoxScoreTeam";
 
 interface AwayTeamData {
   awayTeamName: string;
@@ -73,7 +75,7 @@ export default function MlbPage() {
     }
   }, [isLoading]);
   return (
-    <>
+    <div className="">
       <MlbBoxScoreInnings />
       <MlbBoxScoreTeam
         isLoading={isLoading}
@@ -91,6 +93,10 @@ export default function MlbPage() {
         hits={homeData.homeHits}
         errors={homeData.homeErrors}
       />
-    </>
+      <HitterScoreContainer>
+        <HitterScore />
+        <HitterScore />
+      </HitterScoreContainer>
+    </div>
   );
 }
