@@ -2,7 +2,7 @@ import HitterInfo from "./HitterInfo";
 
 export default function HitterScore() {
   return (
-    <div className="m-2 flex flex-col overflow-x-auto overflow-y-hidden divide-y">
+    <div className="m-2 flex flex-col overflow-x-auto overflow-y-hidden divide-y border-b-2">
       <h1 className="font-bold p-2">Blue Jays Hitting</h1>
       <table className="divide-y">
         <thead>
@@ -20,7 +20,7 @@ export default function HitterScore() {
           </tr>
         </thead>
         <tbody className="">
-          <tr className="even:bg-gray-200">
+          <tr className="even:bg-gray-00">
             <td className="">V. Guerrero Jr.</td>
             <td className="text-center">4</td>
             <td className="text-center">1</td>

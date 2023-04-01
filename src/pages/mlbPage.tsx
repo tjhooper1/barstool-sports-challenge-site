@@ -1,45 +1,22 @@
 import { useEffect, useState } from "react";
-import { useQueryClient, useQuery } from "react-query";
+import { useQuery } from "react-query";
 import HitterScore from "../components/Mlb/hitterScore/HitterScore";
 import HitterScoreContainer from "../components/Mlb/hitterScore/HitterScoreContainer";
 
 import MlbBoxScoreInnings from "../components/Mlb/mlbBoxscore/MlbBoxScoreInnings";
-import MlbBoxScoreTeam from "../components/Mlb/mlbBoxscore/MlbBoxScoreTeam";
+import { TeamData } from "../types/TeamData";
 
-interface AwayTeamData {
-  awayTeamName: string;
-  awayScores: number[];
-  awayHits: number;
-  awayRuns: number;
-  awayErrors: number;
-}
-
-const awayTeamInitialData: AwayTeamData = {
-  awayTeamName: "",
-  awayScores: [],
-  awayRuns: 0,
-  awayHits: 0,
-  awayErrors: 0,
-};
-interface HomeTeamData {
-  homeTeamName: string;
-  homeScores: number[];
-  homeHits: number;
-  homeRuns: number;
-  homeErrors: number;
-}
-
-const homeTeamInitialData: HomeTeamData = {
-  homeTeamName: "",
-  homeScores: [],
-  homeRuns: 0,
-  homeHits: 0,
-  homeErrors: 0,
+const teamInitialData: TeamData = {
+  teamName: "",
+  scores: [],
+  runs: 0,
+  hits: 0,
+  errors: 0,
 };
 
 export default function MlbPage() {
-  const [awayData, setAwayData] = useState<AwayTeamData>(awayTeamInitialData);
-  const [homeData, setHomeData] = useState<HomeTeamData>(homeTeamInitialData);
+  const [awayData, setAwayData] = useState<TeamData>(teamInitialData);
+  const [homeData, setHomeData] = useState<TeamData>(teamInitialData);
 
   const { data, isLoading } = useQuery("mlb", () =>
     fetch("http://127.0.0.1:3000/mlb").then((res) => res.json())
@@ -59,40 +36,25 @@ export default function MlbPage() {
         home_team,
       } = data.data;
       setAwayData({
-        awayTeamName: away_team.abbreviation,
-        awayScores: away_period_scores,
-        awayHits: away_batter_totals.hits,
-        awayRuns: away_batter_totals.runs,
-        awayErrors: away_errors,
+        teamName: away_team.abbreviation,
+        scores: away_period_scores,
+        hits: away_batter_totals.hits,
+        runs: away_batter_totals.runs,
+        errors: away_errors,
       });
       setHomeData({
-        homeTeamName: home_team.abbreviation,
-        homeScores: home_period_scores,
-        homeHits: home_batter_totals.hits,
-        homeRuns: home_batter_totals.runs,
-        homeErrors: home_errors,
+        teamName: home_team.abbreviation,
+        scores: home_period_scores,
+        hits: home_batter_totals.hits,
+        runs: home_batter_totals.runs,
+        errors: home_errors,
       });
     }
   }, [isLoading]);
   return (
     <div className="">
-      <MlbBoxScoreInnings />
-      <MlbBoxScoreTeam
-        isLoading={isLoading}
-        team={awayData.awayTeamName}
-        scores={awayData.awayScores}
-        runs={awayData.awayRuns}
-        hits={awayData.awayHits}
-        errors={awayData.awayErrors}
-      />
-      <MlbBoxScoreTeam
-        isLoading={isLoading}
-        team={homeData.homeTeamName}
-        scores={homeData.homeScores}
-        runs={homeData.homeRuns}
-        hits={homeData.homeHits}
-        errors={homeData.homeErrors}
-      />
+      <MlbBoxScoreInnings homeTeam={homeData} awayTeam={awayData} />
+
       <HitterScoreContainer>
         <HitterScore />
         <HitterScore />

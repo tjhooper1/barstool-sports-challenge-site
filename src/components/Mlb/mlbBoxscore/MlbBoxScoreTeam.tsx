@@ -24,21 +24,17 @@ export default function MlbBoxScoreTeam({
         {scores.map((score: any, index: any) => {
           return <BoxScorePoint key={index} point={score} />;
         })}
-        <BoxScorePoint
-          className="bg-white"
-          point={runs}
-        />
+        <BoxScorePoint className="bg-white" point={runs} />
         <BoxScorePoint className="bg-white" point={hits} />
         <BoxScorePoint className="bg-white" point={errors} />
       </>
     );
   };
   return (
-    <div className="flex">
-      <div className=" bg-white">
-        <h1 className="">{!isLoading && team}</h1>
-      </div>
+    <>
+      <td className="bg-gray-100 pl-2 font-bold">{team}</td>
+
       {isLoading ? <Skeleton /> : showScores()}
-    </div>
+    </>
   );
 }

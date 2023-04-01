@@ -1,45 +1,57 @@
-export default function MlbBoxScoreInnings() {
+
+import { TeamData } from "../../../types/TeamData";
+import MlbBoxScoreTeam from "./MlbBoxScoreTeam";
+
+type MlbBoxScoreInningsProps = {
+  homeTeam: TeamData;
+  awayTeam: TeamData;
+};
+
+export default function MlbBoxScoreInnings({
+  homeTeam,
+  awayTeam,
+}: MlbBoxScoreInningsProps) {
   return (
-    <div className="flex bg-white">
-      <div className="">
-        <div />
-      </div>
-      <div className="">
-        <h1 className="">1</h1>
-      </div>
-      <div className="">
-        <h1 className="">2</h1>
-      </div>
-      <div className="">
-        <h1 className="">3</h1>
-      </div>
-      <div className="">
-        <h1 className="">4</h1>
-      </div>
-      <div className="">
-        <h1 className="">5</h1>
-      </div>
-      <div className="">
-        <h1 className="">6</h1>
-      </div>
-      <div className="">
-        <h1 className="">7</h1>
-      </div>
-      <div className="">
-        <h1 className="">8</h1>
-      </div>
-      <div className="">
-        <h1 className="">9</h1>
-      </div>
-      <div className="">
-        <h1 className="">R</h1>
-      </div>
-      <div className="">
-        <h1 className="">H</h1>
-      </div>
-      <div className="">
-        <h1 className="">E</h1>
-      </div>
+    <div className="bg-white overflow-x-auto overflow-y-hidden">
+      <table className="divide-y w-full">
+        <thead>
+          <tr>
+            <th className="text-sm text-left pr-24 bg-gray-100"></th>
+            <th className="text-sm text-center px-2">1</th>
+            <th className="text-sm text-center px-2">2</th>
+            <th className="text-sm text-center px-2">3</th>
+            <th className="text-sm text-center px-2">4</th>
+            <th className="text-sm text-center px-2">5</th>
+            <th className="text-sm text-center px-2">6</th>
+            <th className="text-sm text-center px-2">7</th>
+            <th className="text-sm text-center px-2">8</th>
+            <th className="text-sm text-center px-2">9</th>
+            <th className="text-sm text-center px-2">R</th>
+            <th className="text-sm text-center px-2">H</th>
+            <th className="text-sm text-center px-2">E</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <MlbBoxScoreTeam
+              team={awayTeam.teamName}
+              scores={awayTeam.scores}
+              runs={awayTeam.runs}
+              hits={awayTeam.hits}
+              errors={awayTeam.errors}
+            />
+          </tr>
+          <tr>
+            <MlbBoxScoreTeam
+              team={homeTeam.teamName}
+              scores={homeTeam.scores}
+              runs={awayTeam.runs}
+              hits={awayTeam.hits}
+              errors={awayTeam.errors}
+            />
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 }
